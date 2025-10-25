@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our 1st Anniversary - October 26</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Georgia', serif;
+        }
+
+        :root {
+            --primary: #ff6b8b;
+            --secondary: #ffa8ba;
+            --accent: #ffd1dc;
+            --dark: #8a2d4d;
+            --light: #fff5f7;
+            --netflix-red: #e50914;
+            --netflix-dark: #141414;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffc2cd 0%, #ffd7e0 100%);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            width: 100%;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            border: 2px dashed var(--primary);
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(45deg, var(--primary), var(--dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        .date {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .counter {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .counter-item {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            min-width: 80px;
+            transition: transform 0.3s ease;
+            border: 1px solid var(--accent);
+        }
+
+        .counter-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .counter-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .counter-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .player-container {
+            width: 100%;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            border: 2px dashed var(--primary);
+        }
+
+        .player-title {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .player-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 25%;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        .spotify-player {
+            width: 100%;
+            height: 352px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--accent);
+        }
+
+        .player-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .control-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(255, 107, 139, 0.3);
+        }
+
+        .control-btn:hover {
+            background: var(--dark);
+            transform: translateY(-2px);
+        }
+
+        .section {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            border: 2px dashed var(--primary);
+        }
+
+        .section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .message {
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .message h2 {
+            color: var(--dark);
+            margin-bottom: 15px;
+            font-size: 2rem;
+        }
+
+        .message p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .memories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .memory-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+            max-width: 200px;
+            transition: transform 0.3s ease;
+            border: 1px solid var(--accent);
+        }
+
+        .memory-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .memory-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        /* Poetry Section */
+        .poetry-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .poem-carousel {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .poem {
+            flex: 0 0 100%;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            border-left: 5px solid var(--primary);
+            text-align: center;
+        }
+
+        .poem-title {
+            font-size: 1.3rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .poem-content {
+            font-style: italic;
+            line-height: 1.8;
+            color: #555;
+            font-size: 1.1rem;
+            white-space: pre-line;
+        }
+
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .carousel-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-btn:hover {
+            background: var(--dark);
+            transform: scale(1.1);
+        }
+
+        .gallery-link {
+            display: inline-block;
+            margin-top: 20px;
+            background: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(255, 107, 139, 0.3);
+        }
+
+        .gallery-link:hover {
+            background: var(--dark);
+            transform: translateY(-3px);
+        }
+
+        /* Netflix Section */
+        .netflix-section {
+            background: var(--netflix-dark);
+            color: white;
+            border: 2px solid var(--netflix-red);
+        }
+
+        .netflix-section::before {
+            background: var(--netflix-red);
+        }
+
+        .netflix-section .section-title {
+            color: white;
+        }
+
+        .shows-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            padding: 10px 0;
+            scrollbar-width: thin;
+            scrollbar-color: var(--netflix-red) var(--netflix-dark);
+        }
+
+        .shows-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .shows-container::-webkit-scrollbar-track {
+            background: var(--netflix-dark);
+            border-radius: 10px;
+        }
+
+        .shows-container::-webkit-scrollbar-thumb {
+            background: var(--netflix-red);
+            border-radius: 10px;
+        }
+
+        .show {
+            flex: 0 0 auto;
+            width: 200px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .show:hover {
+            transform: scale(1.05);
+        }
+
+        .show-img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+
+        .show-info {
+            padding: 10px;
+            background: rgba(20, 20, 20, 0.8);
+        }
+
+        .show-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: white;
+        }
+
+        .show-desc {
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+
+        .netflix-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--netflix-red);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            color: #666;
+            padding: 20px;
+            font-size: 1rem;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 2px dashed var(--primary);
+        }
+
+        .heart {
+            color: var(--primary);
+            animation: heartbeat 1.5s infinite;
+            display: inline-block;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            5% { transform: scale(1.2); }
+            10% { transform: scale(1.1); }
+            15% { transform: scale(1.3); }
+            50% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
+
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .heart-float {
+            position: absolute;
+            color: rgba(255, 107, 139, 0.5);
+            font-size: 20px;
+            animation: float 15s linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Spotify Login */
+        .spotify-login {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .login-btn {
+            background: #1DB954;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .login-btn:hover {
+            background: #1ed760;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .date {
+                font-size: 1.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .counter {
+                flex-wrap: wrap;
+            }
+            
+            .content {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .player-container {
+                width: 100%;
+            }
+            
+            .memory-item {
+                min-width: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-hearts" id="heartsContainer"></div>
+    
+    <div class="container">
+        <header>
+            <h1>Happy 1st Anniversary Stink!</h1>
+            <div class="date">October 26</div>
+            <p class="subtitle">Counting down to our first anniversary</p>
+            <div class="counter">
+                <div class="counter-item">
+                    <div class="counter-value" id="days">0</div>
+                    <div class="counter-label">Days</div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-value" id="hours">0</div>
+                    <div class="counter-label">Hours</div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-value" id="minutes">0</div>
+                    <div class="counter-label">Minutes</div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-value" id="seconds">0</div>
+                    <div class="counter-label">Seconds</div>
+                </div>
+            </div>
+            <p class="subtitle">Until October 26, 2025 at 00:01</p>
+        </header>
+
+        <div class="content">
+            <div class="player-container">
+                <h2 class="player-title">Our Love Playlist</h2>
+                <div class="spotify-player">
+                    <iframe id="spotify-iframe" src="https://open.spotify.com/embed/playlist/0bTkKSwHEBP0vAbMQ7Gfb9?utm_source=generator&theme=0&autoplay=1" width="100%" height="100%" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+                <div class="spotify-login">
+                    <p style="font-size: 0.9rem; margin-bottom: 10px; color: #666;">For full music experience:</p>
+                    <button class="login-btn" id="spotifyLogin">
+                        <i class="fab fa-spotify"></i>
+                        Sign in to Spotify
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">To My Love Stink</h2>
+            <div class="message">
+                <p>The past year has been the best year of my life. From our first date at Rosebank where we could not find each other for like an hour to the ones that followed that you were always late. Every second with you has been a blessing.</p>
+                <p>I will admit this one time that you are kind of funny, and you have brought nothing but joy and laughter into my world. Thank you for being the best.</p>
+                <p>Here's to many more years of happiness together.</p>
+                <p>Forever yours,</p>
+                <p>G <span class="heart">❤️</span></p>
+                
+                <div class="memories">
+                    <div class="memory-item">
+                        <div class="memory-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="memory-text">First Meeting</div>
+                    </div>
+                    <div class="memory-item">
+                        <div class="memory-icon">
+                            <i class="fas fa-glass-cheers"></i>
+                        </div>
+                        <div class="memory-text">First Date</div>
+                    </div>
+                    <div class="memory-item">
+                        <div class="memory-icon">
+                            <i class="fas fa-kiss-wink-heart"></i>
+                        </div>
+                        <div class="memory-text">First Kiss</div>
+                    </div>
+                    <div class="memory-item">
+                        <div class="memory-icon">
+                            <i class="fas fa-ring"></i>
+                        </div>
+                        <div class="memory-text">Anniversary</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Pink Envelope That Did Not Make Cut</h2>
+            <p style="text-align: center; margin-bottom: 20px; color: #666; font-style: italic;">Wrote something every month. Some were lost.</p>
+            <div class="poetry-container">
+                <div class="poem-carousel" id="poemCarousel">
+                    <div class="poem">
+                        <div class="poem-content">
+Eagerly I wait
+like a hound yearning for the return of its owner.
+Time seems to stand still in this moment,
+but as I check my watch,
+it rushes steadily onward.
+Autumn leaves have fallen,
+the dead have been mourned,
+my noir skin crackles from the thirst of touch,
+still, my parched lips echo your name.
+
+Eagerly, I still wait
+to be in your blissful embrace,
+for your laughter to serenade me again.
+Oh, how this grief has befallen me,
+as I stand in this without your presence.
+                        </div>
+                    </div>
+                    <div class="poem">
+                        <div class="poem-content">
+Oh, for I am but an orange moon,
+cursed to radiate the inferno candlelight fire of my love for you.
+This light is merely a reflection,
+and not the love in its entirety.
+
+I refuse the concept of being a stingy, limited vessel,
+but more of a guardian angel.
+
+For the fire that burns results in a death for the both of us.
+It burns vigorously and without bounds.
+                        </div>
+                    </div>
+                    <div class="poem">
+                        <div class="poem-content">
+As the sun rises,
+its light gleams through the crack of your curtain,
+spilling across your caramel skin,
+innocence in its purest form,
+a sight of ethereal beauty.
+
+Your eyes open,
+your lashes flutter
+a solemn prayer only God can hear.
+And in that stillness,
+my heart lifts a hymn to heaven.
+                        </div>
+                    </div>
+                    <div class="poem">
+                        <div class="poem-content">
+Occasionally, a poet.
+Part-time, a painter.
+I could show you my love
+in brushstrokes on canvas,
+or carve it into verse—
+describe our love
+as what i feel and see
+                        </div>
+                    </div>
+                    <div class="poem">
+                        <div class="poem-content">
+want to praise you on every canvas
+on every surface my ink can lie
+restless and unyielding, i want it to prophecy
+i want to sculpt your body from earth
+to reveal the beauty you embody
+on every curve of your body I reconcile
+with the unveiling of tranquility
+
+let me undress the gown of insecurity
+to wash your body in awe and not shame
+to trace the scripture of your form
+for your body serves testament
+that God is a Black woman
+                        </div>
+                    </div>
+                    <div class="poem">
+                        <div class="poem-content">
+The thought of you
+The cure to my solitude,
+My drug,
+You are addictive,
+A vice that feels like virtue
+
+You dance through my mind,
+The moment I rise from slumber,
+Before my eyes open,
+Before I find my balance,
+Or place my feet on the ground.
+
+The divine thought of you is upon me,
+Too long have I been labeled as infatuated.
+This is love.
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-controls">
+                    <button class="carousel-btn" id="prevPoem">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="carousel-btn" id="nextPoem">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="https://photos.app.goo.gl/xqCXbGdT3Z3m1F3N8" target="_blank" class="gallery-link">
+                    <i class="fas fa-images"></i> View Our Photo Gallery
+                </a>
+            </div>
+        </div>
+
+        <div class="section netflix-section">
+            <h2 class="section-title">Shows We Need to Finish</h2>
+            <div class="shows-container">
+                <div class="show">
+                    <div class="netflix-badge">S1 E5</div>
+                    <img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Wayward" class="show-img">
+                    <div class="show-info">
+                        <div class="show-title">Wayward</div>
+                        <div class="show-desc">We loved the mystery but got busy</div>
+                    </div>
+                </div>
+                <div class="show">
+                    <div class="netflix-badge">S1 E3</div>
+                    <img src="https://images.unsplash.com/photo-1595689310173-57dc0c4e781c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Love Never Lies South Africa" class="show-img">
+                    <div class="show-info">
+                        <div class="show-title">Love Never Lies SA</div>
+                        <div class="show-desc">We need to see who stays together</div>
+                    </div>
+                </div>
+                <div class="show">
+                    <div class="netflix-badge">S2 E7</div>
+                    <img src="https://images.unsplash.com/photo-1596250338512-917d0c9b8d93?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Forever" class="show-img">
+                    <div class="show-info">
+                        <div class="show-title">Forever</div>
+                        <div class="show-desc">We stopped right before the finale!</div>
+                    </div>
+                </div>
+                <div class="show">
+                    <div class="netflix-badge">Movie</div>
+                    <img src="https://images.unsplash.com/photo-1581002329235-97b1b9c2f0b8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="To All The Boys I've Loved" class="show-img">
+                    <div class="show-info">
+                        <div class="show-title">To All The Boys</div>
+                        <div class="show-desc">We need to watch this together</div>
+                    </div>
+                </div>
+                <div class="show">
+                    <div class="netflix-badge">S3 E4</div>
+                    <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Atlanta" class="show-img">
+                    <div class="show-info">
+                        <div class="show-title">Atlanta</div>
+                        <div class="show-desc">We loved the humor but got distracted</div>
+                    </div>
+                </div>
+                <div class="show">
+                    <div class="netflix-badge">S5 E2</div>
+                    <img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Adventure Time" class="show-img">
+                    <div class="show-info">
+                        <div class="show-title">Adventure Time</div>
+                        <div class="show-desc">Our favorite cartoon to watch together</div>
+                    </div>
+                </div>
+                <div class="show">
+                    <div class="netflix-badge">S2 E8</div>
+                    <img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="The Amazing World of Gumball" class="show-img">
+                    <div class="show-info">
+                        <div class="show-title">Gumball</div>
+                        <div class="show-desc">We need to finish this hilarious show</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Made with <span class="heart">❤️</span> for our 1st Anniversary Stink | Counting down to October 26, 2025 at 00:01</p>
+        </footer>
+    </div>
+
+    <script>
+        // Create floating hearts
+        function createHearts() {
+            const heartsContainer = document.getElementById('heartsContainer');
+            const heartCount = 15;
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart-float';
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDelay = Math.random() * 15 + 's';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                heartsContainer.appendChild(heart);
+            }
+        }
+
+        // Countdown to October 26, 2025 at 00:01
+        function updateCountdown() {
+            const targetDate = new Date('October 26, 2025 00:01:00').getTime();
+            const now = new Date().getTime();
+            const timeLeft = targetDate - now;
+            
+            if (timeLeft <= 0) {
+                // If the date has passed, set all values to 0
+                document.getElementById('days').textContent = '0';
+                document.getElementById('hours').textContent = '0';
+                document.getElementById('minutes').textContent = '0';
+                document.getElementById('seconds').textContent = '0';
+                return;
+            }
+            
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+        }
+
+        // Poetry Carousel
+        let currentPoem = 0;
+        const poemCarousel = document.getElementById('poemCarousel');
+        const poems = document.querySelectorAll('.poem');
+        const totalPoems = poems.length;
+
+        function showPoem(n) {
+            currentPoem = (n + totalPoems) % totalPoems;
+            poemCarousel.style.transform = `translateX(-${currentPoem * 100}%)`;
+        }
+
+        function nextPoem() {
+            showPoem(currentPoem + 1);
+        }
+
+        function prevPoem() {
+            showPoem(currentPoem - 1);
+        }
+
+        // Add event listeners to poem carousel buttons
+        document.getElementById('nextPoem').addEventListener('click', nextPoem);
+        document.getElementById('prevPoem').addEventListener('click', prevPoem);
+
+        // Auto advance poems every 10 seconds
+        setInterval(nextPoem, 10000);
+
+        // Spotify Login (simulated)
+        document.getElementById('spotifyLogin').addEventListener('click', function() {
+            alert("To sign in to Spotify:\n\n1. Open Spotify in a new tab\n2. Log in to your account\n3. Return to this page\n4. Refresh to enjoy the full music experience!\n\nNote: For full autoplay functionality, you may need Spotify Premium.");
+        });
+
+        // Initialize
+        createHearts();
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
